@@ -1,0 +1,48 @@
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Dotnet publish
+publish/
+*.db
+
+# Docker
+docker-compose.override.yml
+docker-compose.*
+Dockerfile.*
+
+# RabbitMQ (if using local data)
+rabbitmq_data/
+
+# NuGet packages
+*.nupkg
+packages/
+.nuget/
+
+# Logs
+*.log
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Others
+*.vspscc
+*.vssscc
+_ReSharper*/
+.idea/
+*.swp
+*.bak
+*.tmp
+*.pid
