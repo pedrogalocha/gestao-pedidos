@@ -2,13 +2,8 @@ using GestaoPedidos.Application.Dtos;
 using GestaoPedidos.Application.Interfaces.Repositories;
 using GestaoPedidos.Application.Mappers;
 using GestaoPedidos.Domain.Entities;
-using GestaoPedidos.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GestaoPedidos.Infrastructure.Data.Repositories
 {
@@ -27,7 +22,7 @@ namespace GestaoPedidos.Infrastructure.Data.Repositories
         {
             try
             {
-                _logger.LogInformation("Processando e salvando pedido {PedidoId}", pedidoDto.Id);
+                _logger.LogInformation("Processando e salvando pedido {PedidoId}", pedidoDto.CodigoPedido);
 
                 var pedido = pedidoDto.ToEntity();
 
@@ -44,7 +39,7 @@ namespace GestaoPedidos.Infrastructure.Data.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao processar e salvar o pedido {PedidoId}", pedidoDto.Id);
+                _logger.LogError(ex, "Erro ao processar e salvar o pedido {PedidoId}", pedidoDto.CodigoPedido);
                 throw;
             }
         }
@@ -65,6 +60,14 @@ namespace GestaoPedidos.Infrastructure.Data.Repositories
             return await _context.Pedidos
                                  .Where(p => p.ClienteId == clienteId)
                                  .Include(p => p.Itens)
+                                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Pedido>> GetAllAsync()
+        {
+            return await _context.Pedidos
+                                 .Include(p => p.Itens)
+                                 .Include(p => p.Cliente)
                                  .ToListAsync();
         }
     }

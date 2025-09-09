@@ -15,7 +15,7 @@ namespace GestaoPedidos.Application.Mappers
 
             return new Pedido
             {
-                Id = dto.Id,
+                Id = dto.CodigoPedido,
                 ClienteId = dto.ClienteId,
                 PrecoTotal = dto.PrecoTotal,
                 Status = dto.Status ?? string.Empty,
@@ -49,7 +49,7 @@ namespace GestaoPedidos.Application.Mappers
 
             return new PedidoDto
             {
-                Id = entity.Id,
+                CodigoPedido = entity.Id,
                 ClienteId = entity.ClienteId,
                 PrecoTotal = entity.PrecoTotal,
                 Status = entity.Status,

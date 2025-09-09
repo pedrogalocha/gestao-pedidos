@@ -11,8 +11,6 @@ public class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
 
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.Id).ValueGeneratedNever();
-
         builder.Property(p => p.PrecoTotal)
             .HasColumnType("decimal(18, 2)")
             .IsRequired();

@@ -1,0 +1,34 @@
+<div class="create-client-container">
+  <div class="form-container">
+    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()"  style="display: inline-grid;">
+      <mat-form-field appearance="fill">
+        <mat-label>Nome do Cliente</mat-label>
+        <input matInput formControlName="nome">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!clientForm.valid">Cadastrar</button>
+    </form>
+  </div>
+
+  <table mat-table [dataSource]="clientes">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.id}} </td>
+    </ng-container>
+
+    <!-- Nome Column -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.nome}} </td>
+    </ng-container>
+
+    <!-- DataCadastro Column -->
+    <ng-container matColumnDef="dataCadastro">
+      <th mat-header-cell *matHeaderCellDef> Data de Cadastro </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.dataCadastro | date:'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

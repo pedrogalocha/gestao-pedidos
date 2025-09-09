@@ -1,6 +1,7 @@
 using GestaoPedidos.Application.Dtos;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using GestaoPedidos.Domain.Entities;
 
 namespace GestaoPedidos.Application.Interfaces.Repositories
 {
@@ -9,6 +10,7 @@ namespace GestaoPedidos.Application.Interfaces.Repositories
         Task ProcessarEAdicionarPedidoAsync(PedidoDto pedidoDto);
         Task<decimal?> GetValorTotalPedidoAsync(int pedidoId);
         Task<int> GetQuantidadePedidosPorClienteAsync(int clienteId);
-        Task<IEnumerable<GestaoPedidos.Domain.Entities.Pedido>> GetPedidosPorClienteAsync(int clienteId);
+        Task<IEnumerable<Pedido>> GetPedidosPorClienteAsync(int clienteId);
+        Task<IEnumerable<Pedido>> GetAllAsync();
     }
 }

@@ -6,6 +6,7 @@ using GestaoPedidos.Application.Interfaces.Repositories;
 using GestaoPedidos.Application.Mappers;
 using GestaoPedidos.Application.Pedidos.Commands.EnfileirarPedido;
 using GestaoPedidos.Application.Pedidos.Queries.GetValorTotal;
+using GestaoPedidos.Application.Pedidos.Queries.GetAllPedidos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,15 @@ namespace GestaoPedidos.API.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<PedidoDetalhadoDto>), 200)]
+        public async Task<IActionResult> GetAllPedidos()
+        {
+            _logger.LogInformation("Buscando todos os pedidos.");
+            var query = new GetAllPedidosQuery();
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
 
         [HttpPost]
         [ProducesResponseType(202)]

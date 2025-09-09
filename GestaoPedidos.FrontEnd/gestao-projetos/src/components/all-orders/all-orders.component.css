@@ -1,0 +1,21 @@
+.all-orders-container {
+  padding: 20px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+table {
+  width: 100%;
+}
+
+.error {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2em;
+  color: red;
+}

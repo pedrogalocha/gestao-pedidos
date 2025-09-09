@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Cadastrar Novo Pedido</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <form (ngSubmit)="createOrder()">
+      <mat-form-field appearance="fill">
+        <mat-label>Cliente</mat-label>
+        <mat-select [(ngModel)]="clienteId" name="clienteId" required>
+          <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
+            {{cliente.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <h3>Itens do Pedido</h3>
+      <div *ngFor="let item of itens; let i = index" class="item-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Produto</mat-label>
+          <input matInput type="text" [(ngModel)]="item.produto" name="produto-{{i}}" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Quantidade</mat-label>
+          <input matInput type="number" [(ngModel)]="item.quantidade" name="quantidade-{{i}}" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Preço Unitário</mat-label>
+          <input matInput type="number" [(ngModel)]="item.precoUnitario" name="precoUnitario-{{i}}" required>
+        </mat-form-field>
+        <button mat-icon-button color="warn" (click)="removeItem(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="button" (click)="addItem()">Adicionar Item</button>
+        <button mat-raised-button color="accent" type="submit">Criar Pedido</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

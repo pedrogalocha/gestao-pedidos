@@ -40,6 +40,7 @@ builder.Services.AddMediatR(cfg =>
 
 builder.Services.AddScoped<IMessagePublisher, RabbitMqPublisher>();
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 var app = builder.Build();
 

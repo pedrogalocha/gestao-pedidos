@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
 
-# Aguardar o banco de dados estar pronto
-# (Esta é uma verificação simples, em um ambiente de produção real, use uma ferramenta como wait-for-it.sh)
-sleep 15
+until pg_isready -h "postgres" -U "postgres" -q; do
+  echo "Aguardando o banco de dados iniciar..."
+  sleep 2
+done
 
-echo "Aplicando migrações do banco de dados..."
-dotnet ef database update --project GestaoPedidos.Infrastructure/GestaoPedidos.Infrastructure.csproj --startup-project GestaoPedidos.API/GestaoPedidos.API.csproj
+echo "Banco de dados pronto! Executando as migrações..."
+dotnet ef database update --project GestaoPedidos.Infrastructure --startup-project GestaoPedidos.API
 
 echo "Iniciando a aplicação..."
-dotnet GestaoPedidos.API.dll
+exec "$@"

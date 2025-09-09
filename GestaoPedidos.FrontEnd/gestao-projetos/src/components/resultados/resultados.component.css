@@ -1,0 +1,21 @@
+.resultados-container {
+  padding: 20px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.result-card {
+  margin-top: 20px;
+}
+
+.error {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2em;
+  color: red;
+}

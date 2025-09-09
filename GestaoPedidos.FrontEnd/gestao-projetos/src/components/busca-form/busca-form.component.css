@@ -1,0 +1,6 @@
+.busca-form-container {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 20px;
+}

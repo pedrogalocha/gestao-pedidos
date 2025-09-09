@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Consultar Pedidos</h5>
+
+    <div class="busca-form-container">
+      <div class="form-section">
+        <mat-form-field appearance="fill">
+          <mat-label>Cliente</mat-label>
+          <mat-select [(ngModel)]="clienteId">
+            <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
+              {{cliente.nome}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="onBuscarPorCliente()">Buscar Dados do Cliente</button>
+      </div>
+
+      <div class="form-section">
+        <mat-form-field appearance="fill">
+          <mat-label>ID do Pedido</mat-label>
+          <input matInput type="number" placeholder="Digite o ID do Pedido" [(ngModel)]="pedidoId">
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="onBuscarPorPedido()">Buscar Valor do Pedido</button>
+      </div>
+    </div>
+  </div>
+</div>

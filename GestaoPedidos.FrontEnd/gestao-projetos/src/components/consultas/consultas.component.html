@@ -1,0 +1,69 @@
+<mat-card>
+  <mat-card-content>
+    <app-busca-form
+      [clientes]="clientes"
+      (buscarPorCliente)="handleBuscarPorCliente($event)"
+      (buscarPorPedido)="handleBuscarPorPedido($event)">
+    </app-busca-form>
+  </mat-card-content>
+</mat-card>
+
+<div *ngIf="isLoading" class="spinner-container">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="!isLoading && pedidos.length > 0">
+  <h3>Total de pedidos encontrados: {{ pedidos.length }}</h3>
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let pedido of pedidos">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Código do Pedido: {{ pedido.codigoPedido }} - Valor Total: {{ pedido.precoTotal | currency:'BRL' }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <table mat-table [dataSource]="pedido.itens" class="mat-elevation-z8">
+
+        <!-- Produto Column -->
+        <ng-container matColumnDef="produto">
+          <th mat-header-cell *matHeaderCellDef> Item </th>
+          <td mat-cell *matCellDef="let item"> {{item.produto}} </td>
+        </ng-container>
+
+        <!-- Quantidade Column -->
+        <ng-container matColumnDef="quantidade">
+          <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+          <td mat-cell *matCellDef="let item"> {{item.quantidade}} </td>
+        </ng-container>
+
+        <!-- PrecoUnitario Column -->
+        <ng-container matColumnDef="precoUnitario">
+          <th mat-header-cell *matHeaderCellDef> Valor Unitário </th>
+          <td mat-cell *matCellDef="let item"> {{item.precoUnitario | currency:'BRL'}} </td>
+        </ng-container>
+
+        <!-- ValorTotal Column -->
+        <ng-container matColumnDef="valorTotal">
+          <th mat-header-cell *matHeaderCellDef> Valor Total </th>
+          <td mat-cell *matCellDef="let item"> {{ item.quantidade * item.precoUnitario | currency:'BRL' }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div *ngIf="valorTotal">
+    <h4>Valor Total do Pedido</h4>
+    <p>Pedido ID: {{ valorTotal.pedidoId }}</p>
+    <p>Valor Total: {{ valorTotal.valorTotal | currency:'BRL' }}</p>
+</div>
+
